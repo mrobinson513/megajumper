@@ -1,0 +1,7 @@
+{ 
+    "C_Cpp.default.includePath": ["${env:MARSDEV}\\**",
+    "${env:MARSDEV}\\res",
+    "res",
+    "inc"
+]
+}
