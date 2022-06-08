@@ -1,2 +1,6 @@
 /out
 *.zip
+
+# Gens-specific config files
+Gens.cfg
+language.dat

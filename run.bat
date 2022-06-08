@@ -1,4 +1,6 @@
-set OUTFILE=.\out\rom.bin
-set BLASTEM=d:\blastem\blastem.exe
+set EMULATOR=blastem
 
-%BLASTEM% %OUTFILE%
+set OUTFILE=.\out\rom.bin
+set EXECPATH=d:\%EMULATOR%\%EMULATOR%.exe
+
+%EXECPATH% %OUTFILE%

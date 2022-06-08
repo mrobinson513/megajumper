@@ -5,12 +5,13 @@
 // --START Constants
 
 // Integers / Floats
-const int scrollspeed = 1;
+const int scrollspeed = 2;
 
 // Text
 
 char msg_start[22] = "Press START to begin.";
 char msg_reset[22] = "Press START to reset.";
+char msg_begin[7] = "BEGIN!";
 
 // Bool
 bool game_on = FALSE;
@@ -54,11 +55,12 @@ void myJoyHandler( u16 joy, u16 changed, u16 state)
 			if(game_on == FALSE){
 				startGame();
 			}
-		}
+		}	
+		/*
 		if (state & BUTTON_C)
 		{
-			// I'm guessing this will be the bit that makes the little dude jump
-		}
+		
+		}*/
 	}
 }
 
@@ -76,8 +78,7 @@ int main() {
     VDP_loadTileSet(wall.tileset,2,DMA);
     VDP_loadTileSet(light.tileset,3,DMA); // auto-split this into 6 tiles (3-8)
     VDP_setPalette(PAL1, light.palette->data);
-    //VDP_setTileMapXY(BG_B,TILE_ATTR_FULL(PAL1,0,FALSE,FALSE,1),1,1);
-    //VDP_setTileMapXY(BG_B,TILE_ATTR_FULL(PAL1,0,FALSE,TRUE,2),1,2);
+
     VDP_fillTileMapRect(BG_B, TILE_ATTR_FULL(PAL1,0,FALSE,FALSE,1),0,16,32,1);
     VDP_fillTileMapRect(BG_B, TILE_ATTR_FULL(PAL1,0,FALSE,TRUE,2),0,17,32,14);
 
@@ -85,12 +86,15 @@ int main() {
 
     //END init tiles/sprites
 
-	// showText(msg_start);
+	showText(msg_start);
     int offset = 0;
     while(1) {
-        VDP_setHorizontalScroll(BG_B, offset -= scrollspeed);
-        if (offset <= -256) offset = 0;
-
+		if (game_on == TRUE) {
+			VDP_setHorizontalScroll(BG_B, offset -= scrollspeed);
+			if (offset <= -256) offset = 0;
+		}
+		SYS_doVBlankProcess();
     }
-    SYS_doVBlankProcess();
+
+	return(0);
 }
